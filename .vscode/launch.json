@@ -1,0 +1,22 @@
+{
+    "configurations": [
+        {
+            "type": "lldb",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:ss13-stats}",
+            "name": "Debug SsStats",
+            "program": "${workspaceFolder:ss13-stats}/.build/debug/SsStats",
+            "preLaunchTask": "swift: Build Debug SsStats"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:ss13-stats}",
+            "name": "Release SsStats",
+            "program": "${workspaceFolder:ss13-stats}/.build/release/SsStats",
+            "preLaunchTask": "swift: Build Release SsStats"
+        }
+    ]
+}
