@@ -1,5 +1,5 @@
 {
-  "originHash" : "11f54b6bcfb447bdf4ee745fd673c000edfee368ff3591a3b9dd4d34e7f4f424",
+  "originHash" : "3535ac5206aed743e919ca2689253e3238d9f2629218ce2a6ac5d2384412f0d9",
   "pins" : [
     {
       "identity" : "arrow",
@@ -404,15 +404,6 @@
       "state" : {
         "revision" : "014ccd52891b8c098d7e1033d5e72ed76fef7a86",
         "version" : "2.16.0"
-      }
-    },
-    {
-      "identity" : "xxhash.swift",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/tesseract-one/xxHash.swift.git",
-      "state" : {
-        "revision" : "6da8ccfacc312498a0c03515fdf820b7aeae49d5",
-        "version" : "0.1.0"
       }
     },
     {
