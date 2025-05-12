@@ -9,9 +9,21 @@ final class Server: Model, @unchecked Sendable {
     @ID
     var id: UUID?
 
-    /// When this server was scraped from the Hub.
-    @Timestamp(key: "created_at", on: .create)
-    var createdAt: Date?
+    /// The name of this server.
+    @Field(key: "name")
+    var name: String
+
+    /// Current player count.
+    @Field(key: "players")
+    var players: Int
+
+    /// Historical snapshot records.
+    @Children(for: \.$serverId)
+    var snapshotHistory: [ServerSnapshot]
+
+    /// Adult content rating. False by default.
+    @Field(key: "adult")
+    var adult: Bool
 
     /// When this server was updated with newly scraped data.
     @Timestamp(key: "updated_at", on: .update)
@@ -21,18 +33,23 @@ final class Server: Model, @unchecked Sendable {
     @Timestamp(key: "deleted_at", on: .delete)
     var deletedAt: Date?
 
-    /// The name of this server.
-    @Field(key: "name")
-    var name: String
-
-    /// The server's player history as a dictionary where `Key` is the date and `Value` is the player amount.
-    @Field(key: "player_history")
-    var playerHistory: [Date: UInt]
-
     init() {}
 
-    init(name: String, playerHistory: [Date: UInt]) {
+    init(id: UUID? = nil, name: String, players: Int, adult: Bool) {
+        self.id = id
         self.name = name
-        self.playerHistory = playerHistory
+        self.players = players
+        self.adult = adult
+    }
+
+    func toDTO() -> ServerDTO {
+        .init(
+            id: id,
+            name: $name.value,
+            players: $players.value,
+            adult: $adult.value,
+            updatedAt: $updatedAt.timestamp,
+            deletedAt: $deletedAt.timestamp,
+        )
     }
 }

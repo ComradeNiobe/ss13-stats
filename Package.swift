@@ -3,6 +3,7 @@ import PackageDescription
 
 let package = Package(
     name: "SsStats",
+    defaultLocalization: "en-US",
     platforms: [
         .macOS(.v13)
     ],
@@ -17,8 +18,11 @@ let package = Package(
         .package(url: "https://github.com/vapor/leaf.git", from: "4.3.0"),
         // 🔵 Non-blocking, event-driven networking for Swift. Used for custom executors
         .package(url: "https://github.com/apple/swift-nio.git", from: "2.65.0"),
-        // Our scraping library of choice for parsing the SS13 homepage.
         .package(url: "https://github.com/scinfu/SwiftSoup.git", from: "2.8.7"),
+        .package(url: "https://github.com/tesseract-one/xxHash.swift.git", from: "0.1.0"),
+        .package(url: "https://github.com/apple/swift-collections.git", from: "1.1.4"),
+        .package(url: "https://github.com/realm/SwiftLint.git", from: "0.59.1"),
+        .package(url: "https://github.com/freshOS/Arrow.git", from: "7.0.0")
     ],
     targets: [
         .executableTarget(
@@ -31,6 +35,9 @@ let package = Package(
                 .product(name: "NIOCore", package: "swift-nio"),
                 .product(name: "NIOPosix", package: "swift-nio"),
                 .product(name: "SwiftSoup", package: "SwiftSoup"),
+                .product(name: "xxHash", package: "xxHash.swift"),
+                .product(name: "OrderedCollections", package: "swift-collections"),
+                .product(name: "Arrow", package: "arrow")
             ],
             swiftSettings: swiftSettings
         ),
@@ -38,7 +45,7 @@ let package = Package(
             name: "SsStatsTests",
             dependencies: [
                 .target(name: "SsStats"),
-                .product(name: "VaporTesting", package: "vapor"),
+                .product(name: "VaporTesting", package: "vapor")
             ],
             swiftSettings: swiftSettings
         )
@@ -46,5 +53,5 @@ let package = Package(
 )
 
 var swiftSettings: [SwiftSetting] { [
-    .enableUpcomingFeature("ExistentialAny"),
+    .enableUpcomingFeature("ExistentialAny")
 ] }

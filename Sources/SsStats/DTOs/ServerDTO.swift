@@ -2,10 +2,28 @@ import Fluent
 import Vapor
 
 struct ServerDTO: Content {
-    var id: UUID
-    var createdAt: Date
-    var updatedAt: Date
+    var id: UUID?
+    var name: String?
+    var players: Int?
+    var adult: Bool?
+    var updatedAt: Date?
     var deletedAt: Date?
-    var name: String
-    var playerHistory: [Date: UInt]
+
+    func toModel() -> Server {
+        let model = Server()
+
+        model.id = id
+        model.name = name!
+        model.players = players!
+        model.adult = adult ?? false
+
+        return model
+    }
+}
+
+struct HubJSON: Content {
+    var id: UInt
+    var status: String
+    var players: Int
+    var adult: Bool?
 }
