@@ -8,12 +8,14 @@ import Fluent
 
 import struct Foundation.UUID
 
+typealias BlakeHash = String
+
 /// A server on the SS13 Hub.
 final class Server: Model, @unchecked Sendable {
     static let schema: String = "servers"
 
-    @ID
-    var id: UUID?
+    @ID(custom: .id, generatedBy: .user)
+    var id: BlakeHash?
 
     /// The name of this server.
     @Field(key: "name")
@@ -41,7 +43,7 @@ final class Server: Model, @unchecked Sendable {
 
     init() {}
 
-    init(id: UUID? = nil, name: String, players: Int, adult: Bool) {
+    init(id: BlakeHash? = nil, name: String, players: Int, adult: Bool) {
         self.id = id
         self.name = name
         self.players = players

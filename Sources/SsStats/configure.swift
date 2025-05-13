@@ -8,6 +8,7 @@ import Fluent
 import FluentPostgresDriver
 import Leaf
 import NIOSSL
+import QueuesRedisDriver
 import Vapor
 
 // configures your application
@@ -26,6 +27,15 @@ public func configure(_ app: Application) async throws {
     ), as: .psql)
 
     app.migrations.add(CreateServers(), CreateServerSnapshots())
+
+    try app.queues.use(.redis(url: Environment.get("REDIS_HOST") ?? "redis://127.0.0.1:6379"))
+
+    // Runs every 30 minutes.
+    app.queues.schedule(ScrapeJob())
+        .minutely()
+        .at(30)
+
+    try app.queues.startScheduledJobs()
 
     app.views.use(.leaf)
 

@@ -20,7 +20,9 @@ let package = Package(
         .package(url: "https://github.com/apple/swift-nio.git", from: "2.65.0"),
         .package(url: "https://github.com/scinfu/SwiftSoup.git", from: "2.8.7"),
         .package(url: "https://github.com/realm/SwiftLint.git", from: "0.59.1"),
-        .package(url: "https://github.com/freshOS/Arrow.git", from: "7.0.0")
+        .package(url: "https://github.com/freshOS/Arrow.git", from: "7.0.0"),
+        .package(url: "https://github.com/vapor/queues-redis-driver.git", from: "1.1.2"),
+        .package(url: "https://github.com/JoshuaBrest/blake3-swift.git", from: "0.2.1")
     ],
     targets: [
         .executableTarget(
@@ -33,7 +35,9 @@ let package = Package(
                 .product(name: "NIOCore", package: "swift-nio"),
                 .product(name: "NIOPosix", package: "swift-nio"),
                 .product(name: "SwiftSoup", package: "SwiftSoup"),
-                .product(name: "Arrow", package: "arrow")
+                .product(name: "Arrow", package: "arrow"),
+                .product(name: "QueuesRedisDriver", package: "queues-redis-driver"),
+                .product(name: "BLAKE3", package: "blake3-swift")
             ],
             swiftSettings: swiftSettings
         ),

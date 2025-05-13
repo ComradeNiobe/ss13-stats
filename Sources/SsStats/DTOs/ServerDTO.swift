@@ -8,7 +8,7 @@ import Fluent
 import Vapor
 
 struct ServerDTO: Content {
-    var id: UUID?
+    var id: BlakeHash?
     var name: String?
     var players: Int?
     var adult: Bool?
