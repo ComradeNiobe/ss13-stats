@@ -49,7 +49,11 @@ struct ScrapeController: RouteCollection {
             await withThrowingTaskGroup(of: Void.self) { taskGroup in
                 for server in scrapedServersToSave {
                     taskGroup.addTask {
-                        try await server.save(on: req.db)
+                        let snapshot = ServerSnapshot(playerCount: server.$players.value!)
+                        try await req.db.transaction { transaction in
+                            try await server.save(on: transaction)
+                            try await server.$snapshots.create(snapshot, on: transaction)
+                        }
                     }
                 }
             }

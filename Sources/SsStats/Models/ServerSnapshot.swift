@@ -9,7 +9,7 @@ final class ServerSnapshot: Model, @unchecked Sendable {
     @ID
     var id: UUID?
 
-    /// Foreign key to the server being snapshot.
+    /// Foreign key to the server being snapshot. Initialized on server save/update.
     @Parent(key: "server_id")
     var serverId: Server
 
@@ -21,9 +21,8 @@ final class ServerSnapshot: Model, @unchecked Sendable {
 
     init() {}
 
-    init(id: UUID? = nil, serverId: Server.IDValue, playerCount: Int) {
+    init(id: UUID? = nil, playerCount: Int) {
         self.id = id
-        self.$serverId.id = serverId
         self.playerCount = playerCount
     }
 

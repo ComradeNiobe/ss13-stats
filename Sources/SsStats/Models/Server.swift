@@ -19,7 +19,7 @@ final class Server: Model, @unchecked Sendable {
 
     /// Historical snapshot records.
     @Children(for: \.$serverId)
-    var snapshotHistory: [ServerSnapshot]
+    var snapshots: [ServerSnapshot]
 
     /// Adult content rating. False by default.
     @Field(key: "adult")
