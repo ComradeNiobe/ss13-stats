@@ -55,6 +55,7 @@ final class Server: Model, @unchecked Sendable {
             id: id,
             name: $name.value,
             players: $players.value,
+            snapshots: $snapshots.value?.map { $0.toDTO() },
             adult: $adult.value,
             updatedAt: $updatedAt.timestamp,
             deletedAt: $deletedAt.timestamp,

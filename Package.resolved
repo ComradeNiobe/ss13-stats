@@ -1,5 +1,5 @@
 {
-  "originHash" : "9c89a308e2841f2e6042a72a201bcaa65248391839f7fe671ffdc658af48c922",
+  "originHash" : "42e1fef5e2cef72f90dc714090ee3f02523a001cf878903b9007f19db991ca90",
   "pins" : [
     {
       "identity" : "arrow",
@@ -440,6 +440,15 @@
       "state" : {
         "revision" : "87b0edd2633c35de543cb7573efe5fbf456181bc",
         "version" : "4.114.1"
+      }
+    },
+    {
+      "identity" : "vaporsecurityheaders",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/brokenhandsio/VaporSecurityHeaders.git",
+      "state" : {
+        "revision" : "0a25315d95746557e710237c72af7b7428e24c6a",
+        "version" : "4.2.0"
       }
     },
     {

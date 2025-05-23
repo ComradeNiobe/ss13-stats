@@ -57,13 +57,18 @@ struct ScrapeJob: AsyncScheduledJob {
                                 try await savedServer.save(on: transaction)
                                 try await savedServer.$snapshots.create(snapshot, on: transaction)
                             } else {
-                                try await server.create(on: transaction)
+                                try await server.save(on: transaction)
                                 try await server.$snapshots.create(snapshot, on: transaction)
                             }
                         }
                     }
                 }
             }
+
+            guard var hub = app.hub else {
+                throw Abort(.internalServerError, reason: "Couldn't access internal hub cache.")
+            }
+            try await hub.update(using: app)
         } else {
             throw Abort(.notFound, reason: "Reason: \(response.status.reasonPhrase)")
         }

@@ -7,7 +7,10 @@
             "cwd": "${workspaceFolder:ss13-stats}",
             "name": "Debug SsStats",
             "program": "${workspaceFolder:ss13-stats}/.build/debug/SsStats",
-            "preLaunchTask": "swift: Build Debug SsStats"
+            "preLaunchTask": "swift: Build Debug SsStats",
+            "env": {
+                "LOG_LEVEL": "debug",
+            }
         },
         {
             "type": "swift-lldb",

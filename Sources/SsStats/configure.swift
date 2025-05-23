@@ -10,6 +10,7 @@ import Leaf
 import NIOSSL
 import QueuesRedisDriver
 import Vapor
+import VaporSecurityHeaders
 
 // configures your application
 public func configure(_ app: Application) async throws {
@@ -30,14 +31,32 @@ public func configure(_ app: Application) async throws {
 
     try app.queues.use(.redis(url: Environment.get("REDIS_HOST") ?? "redis://127.0.0.1:6379"))
 
+    // Inits the hub singleton.
+    app.hub = .init()
+    try await app.hub?.update(using: app)
+
     // Runs every 30 minutes.
     app.queues.schedule(ScrapeJob())
-        .minutely()
+        .hourly()
         .at(30)
+    app.queues.schedule(ScrapeJob())
+        .hourly()
+        .at(59)
 
     try app.queues.startScheduledJobs()
 
-    app.views.use(.leaf)
+    let securityHeaders = SecurityHeadersFactory.api()
+    let corsConfiguration = CORSMiddleware.Configuration(
+        allowedOrigin: .all,
+        allowedMethods: [.GET],
+        allowedHeaders: [.accept, .authorization, .contentType, .origin, .xRequestedWith, .userAgent, .accessControlAllowOrigin]
+    )
+    let cors = CORSMiddleware(configuration: corsConfiguration)
+
+    app.middleware = Middlewares()
+    app.middleware.use(cors, at: .beginning)
+    app.middleware.use(securityHeaders.build())
+    app.middleware.use(ErrorMiddleware.default(environment: app.environment))
 
     // register routes
     try routes(app)

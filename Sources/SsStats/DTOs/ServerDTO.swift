@@ -11,6 +11,7 @@ struct ServerDTO: Content {
     var id: BlakeHash?
     var name: String?
     var players: Int?
+    var snapshots: [ServerSnapshotDTO]?
     var adult: Bool?
     var updatedAt: Date?
     var deletedAt: Date?

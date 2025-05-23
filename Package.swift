@@ -22,7 +22,8 @@ let package = Package(
         .package(url: "https://github.com/realm/SwiftLint.git", from: "0.59.1"),
         .package(url: "https://github.com/freshOS/Arrow.git", from: "7.0.0"),
         .package(url: "https://github.com/vapor/queues-redis-driver.git", from: "1.1.2"),
-        .package(url: "https://github.com/JoshuaBrest/blake3-swift.git", from: "0.2.1")
+        .package(url: "https://github.com/JoshuaBrest/blake3-swift.git", from: "0.2.1"),
+        .package(url: "https://github.com/brokenhandsio/VaporSecurityHeaders.git", from: "4.2.0")
     ],
     targets: [
         .executableTarget(
@@ -37,7 +38,8 @@ let package = Package(
                 .product(name: "SwiftSoup", package: "SwiftSoup"),
                 .product(name: "Arrow", package: "arrow"),
                 .product(name: "QueuesRedisDriver", package: "queues-redis-driver"),
-                .product(name: "BLAKE3", package: "blake3-swift")
+                .product(name: "BLAKE3", package: "blake3-swift"),
+                .product(name: "VaporSecurityHeaders", package: "VaporSecurityHeaders")
             ],
             swiftSettings: swiftSettings
         ),
