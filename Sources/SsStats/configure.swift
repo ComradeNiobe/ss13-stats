@@ -6,7 +6,6 @@
 
 import Fluent
 import FluentPostgresDriver
-import Leaf
 import NIOSSL
 import QueuesRedisDriver
 import Vapor
